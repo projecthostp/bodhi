@@ -1,4 +1,5 @@
 import React from 'react';
+import { assetUrl } from '../utils/paths';
 import { Product } from '../types';
 import { motion } from 'framer-motion';
 
@@ -7,12 +8,15 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const src = product.image.startsWith('/')
+    ? assetUrl(product.image)
+    : product.image;
   return (
     <div className="group cursor-pointer">
       {/* Image Container with Reveal Logic */}
       <div className="aspect-[4/5] w-full overflow-hidden bg-white/20 relative img-hover-zoom">
         <motion.img 
-          src={product.image} 
+          src={src} 
           alt={product.name}
           className="w-full h-full object-contain" 
         />

@@ -17,11 +17,13 @@ import { PRODUCTS_DATA, CATEGORY_CONFIG, HERO_SLIDES, GALLERY_PROJECTS, ALL_COLL
 import { ProductCard } from './components/ProductCard';
 import { ProjectCard } from './components/ProjectCard';
 import { Category, SubCategory } from './types';
+import emailjs from '@emailjs/browser'
+import { assetUrl } from './utils/paths';
 
 const Logo = ({ light = false }: { light?: boolean }) => (
   <div className="flex items-center gap-4 group cursor-pointer">
     {/* The Square BT Logo Mark - Using uploaded logo */}
-    <img src="/logo/umesh.jpeg" alt="Bodhitree Logo" className="w-12 h-12 transition-transform duration-700 group-hover:rotate-12 object-contain" />
+    <img src={assetUrl('logo/umesh.jpeg')} alt="Bodhitree Logo" className="w-12 h-12 transition-transform duration-700 group-hover:rotate-12 object-contain" />
     
     <div className="flex flex-col justify-center">
       <div className="flex items-center leading-none">
@@ -34,6 +36,9 @@ const Logo = ({ light = false }: { light?: boolean }) => (
     </div>
   </div>
 );
+const EMAILJS_SERVICE_ID = 'service_l2opxmy';
+const EMAILJS_TEMPLATE_ID = 'template_i9umcr4';
+const EMAILJS_PUBLIC_KEY = 'cTdQsSabgpwLAOJGK';
 
 const App = () => {
   const [activeSection, setActiveSection] = useState<'home' | 'products' | 'gallery' | 'about' | 'contact'>('home');
@@ -58,14 +63,44 @@ const App = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const submitContact = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validateContact()) return;
-    setContactStatus('sending');
-    setTimeout(() => {
-      setContactStatus('sent');
-    }, 1200);
-  };
+ const submitContact = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  // validation first
+  if (!validateContact()) return;
+
+  setContactStatus('sending');
+
+  try {
+    await emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      {
+        name: contactForm.name,
+        email: contactForm.email,
+        phone: contactForm.phone,
+        message: contactForm.message,
+        time: new Date().toLocaleString(),
+      },
+      EMAILJS_PUBLIC_KEY
+    );
+
+    setContactStatus('sent');
+
+    // clear form after success
+    setContactForm({
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
+    });
+  } catch (error) {
+    console.error('EmailJS error:', error);
+    setContactStatus('idle');
+    alert('Failed to send message. Please try again.');
+  }
+};
+
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 80);
@@ -448,7 +483,7 @@ const App = () => {
               </div>
 
               <div className="w-full bg-surfaceDark rounded-lg overflow-hidden">
-                <img src="/about us/ROYAL.png" className="w-full h-auto object-contain" alt="Bodhitree Design Heritage" />
+                <img src={assetUrl('about us/ROYAL.png')} className="w-full h-auto object-contain" alt="Bodhitree Design Heritage" />
               </div>
             </motion.div>
           </div>
