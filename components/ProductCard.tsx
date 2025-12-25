@@ -8,10 +8,10 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  // Handle pre-encoded paths (with %20 for spaces) and raw paths differently
+  // For pre-encoded paths (with %20), we need to add the base path prefix without double encoding
   const src = product.image.startsWith('/')
     ? (product.image.includes('%20')
-        ? `${import.meta.env.BASE_URL}${product.image.slice(1)}`
+        ? `/bodhi${product.image}`
         : assetUrl(product.image))
     : product.image;
   return (
