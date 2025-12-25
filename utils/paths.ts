@@ -6,5 +6,7 @@ export const assetUrl = (path: string): string => {
   // Use encodeURI to handle spaces and special characters
   const encoded = encodeURI(cleanPath);
   // Combine base + encoded path
-  return `${base}${encoded}`;
+  const result = `${base}${encoded}`;
+  console.log('assetUrl debug:', { path, base, cleanPath, encoded, result });
+  return result;
 };
