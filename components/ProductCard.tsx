@@ -8,8 +8,11 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  // Handle pre-encoded paths (with %20 for spaces) and raw paths differently
   const src = product.image.startsWith('/')
-    ? assetUrl(product.image)
+    ? (product.image.includes('%20')
+        ? `${import.meta.env.BASE_URL}${product.image.slice(1)}`
+        : assetUrl(product.image))
     : product.image;
   return (
     <div className="group cursor-pointer">
