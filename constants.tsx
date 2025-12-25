@@ -6,14 +6,15 @@ import {
   Coffee, 
   Users,
   Layout,
-  UtensilsCrossed
+  UtensilsCrossed,
+  Sofa
 } from 'lucide-react';
 import { Category, Product, Project } from './types';
 
 export const CATEGORY_CONFIG: Record<Category, { label: string; icon: React.ReactNode; subCategories?: { id: string; label: string }[] }> = {
   sofas: { 
     label: "Sofas", 
-    icon: <Armchair />,
+    icon: <Sofa />,
   },
   chairs: { 
     label: "Chairs", 
