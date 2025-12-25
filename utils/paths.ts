@@ -1,12 +1,12 @@
 export const assetUrl = (path: string): string => {
-  // Get the base URL, fallback to '/'
-  const base = import.meta.env.BASE_URL || '/';
-  // Remove leading slash if present
+  // Always use /bodhi/ as the base path for GitHub Pages
+  const basePath = '/bodhi/';
+  // Clean the path - remove leading slash if present
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  // Use encodeURI to handle spaces and special characters
-  const encoded = encodeURI(cleanPath);
-  // Combine base + encoded path
-  const result = `${base}${encoded}`;
-  console.log('assetUrl debug:', { path, base, cleanPath, encoded, result });
-  return result;
+  // Encode each path segment separately to handle spaces properly
+  const segments = cleanPath.split('/');
+  const encodedSegments = segments.map(segment => 
+    encodeURIComponent(segment).replace(/%20/g, '%20') // Keep %20 for spaces
+  );
+  return basePath + encodedSegments.join('/');
 };
