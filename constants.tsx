@@ -16,6 +16,10 @@ export const CATEGORY_CONFIG: Record<Category, { label: string; icon: React.Reac
     label: "Sofas", 
     icon: <Sofa />,
   },
+  puffy: { 
+    label: "Puffy", 
+    icon: <Armchair />,
+  },
   chairs: { 
     label: "Chairs", 
     icon: <Armchair />, 
@@ -117,6 +121,16 @@ export const PRODUCTS_DATA: Product[] = [
     { id: 's-52', category: 'sofas', name: "Premium Sofa 52", description: "Elegant and comfortable seating for living spaces.", image: "/sofa%20images/sofa%20(52).jpg" },
     { id: 's-53', category: 'sofas', name: "Premium Sofa 53", description: "Elegant and comfortable seating for living spaces.", image: "/sofa%20images/sofa%20(53).jpg" },
     { id: 's-54', category: 'sofas', name: "Premium Sofa 54", description: "Elegant and comfortable seating for living spaces.", image: "/sofa%20images/sofa%20(54).jpg" },
+
+    // Puffy Collection
+    { id: 'pf-01', category: 'puffy', name: "Puffy 1", description: "Luxuriously soft and comfortable puffy seating design.", image: "/puffy%20images/puffy%20(1).jpg" },
+    { id: 'pf-02', category: 'puffy', name: "Puffy 2", description: "Luxuriously soft and comfortable puffy seating design.", image: "/puffy%20images/puffy%20(2).jpg" },
+    { id: 'pf-03', category: 'puffy', name: "Puffy 3", description: "Luxuriously soft and comfortable puffy seating design.", image: "/puffy%20images/puffy%20(3).jpg" },
+    { id: 'pf-04', category: 'puffy', name: "Puffy 4", description: "Luxuriously soft and comfortable puffy seating design.", image: "/puffy%20images/puffy%20(4).jpg" },
+    { id: 'pf-05', category: 'puffy', name: "Puffy 5", description: "Luxuriously soft and comfortable puffy seating design.", image: "/puffy%20images/puffy%20(5).jpg" },
+    { id: 'pf-06', category: 'puffy', name: "Puffy 6", description: "Luxuriously soft and comfortable puffy seating design.", image: "/puffy%20images/puffy%20(6).jpg" },
+    { id: 'pf-07', category: 'puffy', name: "Puffy 7", description: "Luxuriously soft and comfortable puffy seating design.", image: "/puffy%20images/puffy%20(7).jpg" },
+    { id: 'pf-08', category: 'puffy', name: "Puffy 8", description: "Luxuriously soft and comfortable puffy seating design.", image: "/puffy%20images/puffy%20(8).jpg" },
     // Chairs - Lounge Subcategory
     { 
         id: 'l-01', 

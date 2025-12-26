@@ -1,6 +1,7 @@
 
 export type Category = 
   | 'sofas'
+  | 'puffy'
   | 'chairs' 
   | 'coffee_table' 
   | 'conference_table' 

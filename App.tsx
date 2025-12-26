@@ -11,7 +11,15 @@ import {
   ChevronRight,
   MapPin,
   Phone,
-  Mail
+  Mail,
+  Download,
+  Code,
+  Hammer,
+  Wrench,
+  Ruler,
+  Layout,
+  Home as HomeIcon,
+  Box
 } from 'lucide-react';
 import { PRODUCTS_DATA, CATEGORY_CONFIG, HERO_SLIDES, GALLERY_PROJECTS, ALL_COLLECTION_PRODUCTS } from './constants';
 import { ProductCard } from './components/ProductCard';
@@ -28,10 +36,10 @@ const Logo = ({ light = false }: { light?: boolean }) => (
     <div className="flex flex-col justify-center">
       <div className="flex items-center leading-none">
         <span className={`font-serif text-2xl font-light tracking-tighter ${light ? 'text-white' : 'text-primary'} group-hover:italic transition-all`}>bodhi</span>
-        <span className={`font-serif text-2xl font-bold tracking-tighter ${light ? 'text-white' : 'text-primary'}`}>tree</span>
+        <span className={`font-serif text-2xl font-bold tracking-tighter ${light ? 'text-white' : 'text-primary'}`}>tree LLP</span>
       </div>
       <span className={`text-[7px] uppercase font-bold tracking-[0.5em] mt-1.5 ${light ? 'text-white/40' : 'text-primary/40'}`}>
-        designers furniture
+        designer's furniture
       </span>
     </div>
   </div>
@@ -41,13 +49,15 @@ const EMAILJS_TEMPLATE_ID = 'template_i9umcr4';
 const EMAILJS_PUBLIC_KEY = 'cTdQsSabgpwLAOJGK';
 
 const App = () => {
-  const [activeSection, setActiveSection] = useState<'home' | 'products' | 'gallery' | 'about' | 'contact'>('home');
+  const [activeSection, setActiveSection] = useState<'home' | 'products' | 'gallery' | 'about' | 'services' | 'downloads' | 'contact'>('home');
   const [isProductMenuOpen, setIsProductMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<Category | 'all'>('all');
   const [selectedSubCategory, setSelectedSubCategory] = useState<SubCategory>('none');
   const [isScrolled, setIsScrolled] = useState(false);
   const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
   // Contact form state
   const [contactForm, setContactForm] = useState({ name: '', email: '', phone: '', message: '' });
   const [contactErrors, setContactErrors] = useState<{ name?: string; email?: string; phone?: string; message?: string }>({});
@@ -164,6 +174,8 @@ const App = () => {
     { id: 'products', label: 'Products', hasDropdown: true },
     { id: 'gallery', label: 'Gallery' },
     { id: 'about', label: 'About' },
+    { id: 'services', label: 'Services' },
+    { id: 'downloads', label: 'Downloads' },
     { id: 'contact', label: 'Contact' },
   ];
 
@@ -504,7 +516,7 @@ const App = () => {
                       </div>
                       <div>
                         <h3 className="text-xl font-bold mb-3">Manufacturing Unit</h3>
-                        <p className="text-base font-light opacity-70 leading-relaxed">#8, 5th Cross, Muninagappa Layout,<br/>Kaval Bayasandara, RT Nagar,<br/>Bangalore 560032</p>
+                        <p className="text-base font-light opacity-70 leading-relaxed">#8, 6th Cross,<br/>Kaval Bayasandara, RT Nagar,<br/>Bangalore 560032</p>
                       </div>
                     </div>
                     
@@ -526,7 +538,7 @@ const App = () => {
                       </div>
                       <div>
                         <h3 className="text-xl font-bold mb-3">Email</h3>
-                        <p className="text-base font-light opacity-70"><a href="mailto:info@bodhitree.com" className="hover:text-primary hover:opacity-100 transition-all">umeshchintu6279@gmail.com</a></p>
+                        <p className="text-base font-light opacity-70"><a href="mailto:info@bodhitree.com" className="hover:text-primary hover:opacity-100 transition-all">info@bodhitreedf.com</a></p>
                       </div>
                     </div>
                   </div>
@@ -604,6 +616,255 @@ const App = () => {
           </div>
         )}
 
+        {/* SERVICES SECTION */}
+        {activeSection === 'services' && (
+          <div className="pt-[220px] pb-32 bg-gradient-to-b from-background to-surfaceLight/40">
+            <div className="max-w-[1400px] mx-auto px-12 space-y-16">
+              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+                <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-primary/60">What we deliver</p>
+                <h2 className="text-7xl font-serif font-bold tracking-tighter">Services.</h2>
+                <p className="text-lg font-light opacity-70 max-w-3xl">
+                  End-to-end support for designers, architects, and clients—from concept to installation. Precision craftsmanship, reliable timelines, and seamless coordination.
+                </p>
+              </motion.div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+                {[
+                  {
+                    title: 'Custom Furniture',
+                    detail: 'We design and build pieces that fit your space perfectly—size, finish, and materials your way.',
+                    tag: 'Bespoke',
+                    icon: <Hammer size={24} />,
+                    theme: 'from-amber-500/15 to-white/60',
+                    iconBg: 'bg-amber-500/15 text-amber-600'
+                  },
+                  {
+                    title: 'Turnkey Fit-Outs',
+                    detail: 'We handle layout, build, and installation for full spaces—so you get a ready-to-use interior.',
+                    tag: 'End-to-end',
+                    icon: <Layout size={24} />,
+                    theme: 'from-blue-500/15 to-white/60',
+                    iconBg: 'bg-blue-500/15 text-blue-600'
+                  },
+                  {
+                    title: 'Design Collaboration',
+                    detail: 'Sit with our designers for samples, mockups, and detailing—we refine it together until it’s right.',
+                    tag: 'Collab',
+                    icon: <Ruler size={24} />,
+                    theme: 'from-purple-500/15 to-white/60',
+                    iconBg: 'bg-purple-500/15 text-purple-600'
+                  },
+                  {
+                    title: 'Web Development',
+                    detail: 'Full-stack web projects: brand sites, product catalogs, landing pages, hosting, and lightweight portals with responsive, fast, and secure builds.',
+                    tag: 'Web',
+                    icon: <Code size={24} />,
+                    theme: 'from-sky-500/15 to-white/60',
+                    iconBg: 'bg-sky-500/15 text-sky-600'
+                  },
+                  {
+                    title: 'Modular Install & Dismantle',
+                    detail: 'On-site installation, reconfiguration, and dismantling of modular furniture with minimal downtime and clean exits.',
+                    tag: 'Install',
+                    icon: <Wrench size={24} />,
+                    theme: 'from-emerald-500/15 to-white/60',
+                    iconBg: 'bg-emerald-500/15 text-emerald-600'
+                  },
+                  {
+                    title: 'Custom Design & Manufacturing',
+                    detail: 'Tailor-made furniture solutions designed specifically for your space and requirements.',
+                    tag: 'Design',
+                    icon: <Box size={24} />,
+                    theme: 'from-orange-500/15 to-white/60',
+                    iconBg: 'bg-orange-500/15 text-orange-600'
+                  },
+                  {
+                    title: 'Interior Consultation',
+                    detail: 'Professional interior design advice to help you create the perfect space.',
+                    tag: 'Consult',
+                    icon: <HomeIcon size={24} />,
+                    theme: 'from-rose-500/15 to-white/60',
+                    iconBg: 'bg-rose-500/15 text-rose-600'
+                  },
+                  {
+                    title: 'Space Planning',
+                    detail: 'Optimize layouts for maximum functionality and aesthetics across your spaces.',
+                    tag: 'Plan',
+                    icon: <Layout size={24} />,
+                    theme: 'from-indigo-500/15 to-white/60',
+                    iconBg: 'bg-indigo-500/15 text-indigo-600'
+                  },
+                  {
+                    title: 'Installation & Setup',
+                    detail: 'Professional installation and setup services for all our furniture pieces.',
+                    tag: 'Setup',
+                    icon: <Wrench size={24} />,
+                    theme: 'from-lime-500/15 to-white/60',
+                    iconBg: 'bg-lime-500/15 text-lime-700'
+                  }
+                ].map((item, idx) => (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.05 * idx }}
+                    className={`relative overflow-hidden rounded-2xl border border-primary/10 bg-white/60 backdrop-blur-sm p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1`}
+                  >
+                    <div className={`absolute inset-0 bg-gradient-to-br ${item.theme}`} />
+                    <div className="absolute -right-10 -top-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl" />
+                    <div className="relative space-y-4">
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center ${item.iconBg}`}>
+                        {item.icon}
+                      </div>
+                      <span className="inline-flex text-[10px] font-bold uppercase tracking-[0.4em] bg-primary/10 text-primary px-3 py-1 rounded-full">{item.tag}</span>
+                      <h3 className="text-2xl font-serif font-bold">{item.title}</h3>
+                      <p className="text-sm font-light opacity-70 leading-relaxed">{item.detail}</p>
+                      {item.tag === 'Web' && (
+                        <div className="space-y-1 text-[12px] font-semibold text-primary/80 pt-2">
+                          <p>Call: 8197408904</p>
+                          <p>Call: 9353370699</p>
+                          <p>Email: cyberwebdev655@gmail.com</p>
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pt-6">
+                <div className="space-y-2 text-sm font-light opacity-70 max-w-2xl">
+                  <p>Need specs, lead times, a web project estimate, or a custom build? Share your requirements and our team will respond within one business day.</p>
+                </div>
+                <button
+                  onClick={() => {
+                    setActiveSection('contact');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="inline-flex items-center gap-3 px-10 py-4 border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-500 font-bold uppercase tracking-wider text-[11px]"
+                >
+                  Talk to Us
+                  <ArrowUpRight size={16} />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* DOWNLOADS SECTION */}
+        {activeSection === 'downloads' && (
+          <div className="pt-[260px] pb-40 bg-gradient-to-b from-background to-surfaceDark/20">
+            <div className="max-w-[1600px] mx-auto px-12">
+              <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} className="space-y-24">
+                <div className="space-y-6 text-center max-w-3xl mx-auto">
+                  <h1 className="text-9xl font-serif font-bold tracking-tighter">Downloads.</h1>
+                  <p className="text-lg font-light opacity-70">
+                    Access our comprehensive catalogs, technical specifications, and design portfolios. Download resources to explore every detail of our collections.
+                  </p>
+                </div>
+
+                {/* Horizontal Download Cards */}
+                <div className="space-y-12">
+                  {[
+                    {
+                      title: 'Company Catalog',
+                      subtitle: '2025 EDITION',
+                      description: 'Complete product collection featuring all our designs, dimensions, and detailed specifications for every furniture piece.',
+                      file: 'catalogs/company-catalog.pdf',
+                      size: '8.4 MB',
+                      image: '/about us/ROYAL.png',
+                      accent: 'from-blue-500/20',
+                      base: 'bg-blue-50/60'
+                    },
+                    {
+                      title: 'Materials Guide',
+                      subtitle: 'TECHNICAL SPECIFICATIONS',
+                      description: 'Comprehensive guide covering sustainable materials, finishes, durability standards, and care instructions for all our furniture.',
+                      file: 'catalogs/materials-guide.pdf',
+                      size: '6.2 MB',
+                      image: '/about us/ROYAL.png',
+                      accent: 'from-amber-500/20',
+                      base: 'bg-amber-50/60'
+                    },
+                    {
+                      title: 'Design Portfolio',
+                      subtitle: 'AWARD-WINNING PROJECTS',
+                      description: 'Showcase of our international design projects, installations, and creative approach to contemporary furniture design.',
+                      file: 'catalogs/design-portfolio.pdf',
+                      size: '12.8 MB',
+                      image: '/about us/ROYAL.png',
+                      accent: 'from-purple-500/20',
+                      base: 'bg-purple-50/60'
+                    }
+                  ].map((item, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.15 }}
+                      className="group relative"
+                    >
+                      <div className={`relative rounded-xl p-12 border border-primary/15 hover:border-primary/30 transition-all duration-700 shadow-lg hover:shadow-2xl bg-gradient-to-r ${item.accent} to-surfaceLight/80 hover:to-surfaceLight ${item.base || ''}`}>
+                        {/* Background accent */}
+                        <div className="absolute -right-32 -top-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all duration-700" />
+                        
+                        <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+                        {/* Left Content */}
+                        <div className="flex-1 space-y-6">
+                          <div>
+                            <p className="text-[11px] font-bold uppercase tracking-[0.4em] text-primary/60 mb-2">{item.subtitle}</p>
+                            <h3 className="text-4xl font-serif font-bold tracking-tight">{item.title}</h3>
+                          </div>
+                          <p className="text-base font-light opacity-70 leading-relaxed max-w-xl">
+                            {item.description}
+                          </p>
+                          <div className="flex items-center gap-8 pt-4">
+                            <span className="text-[12px] font-bold uppercase tracking-[0.3em] opacity-50">PDF FORMAT</span>
+                            <span className="text-[12px] font-bold uppercase tracking-[0.3em] opacity-50">{item.size}</span>
+                          </div>
+                        </div>
+
+                        {/* Right Button */}
+                        <div className="flex flex-col items-center gap-6">
+                          <a
+                            href={item.file}
+                            download={item.file.split('/').pop()}
+                            className="group/btn px-12 py-5 bg-primary text-white font-bold uppercase tracking-wider text-[11px] hover:bg-primary/90 transition-all duration-500 hover:scale-105 active:scale-95 whitespace-nowrap flex items-center gap-3"
+                          >
+                            <Download size={20} className="group-hover/btn:translate-y-1 transition-transform" />
+                            Download
+                          </a>
+                          <span className="text-[10px] opacity-40 uppercase tracking-widest">Click to download</span>
+                        </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* CTA Section */}
+                <div className="mt-20 pt-16 border-t border-primary/10">
+                  <div className="text-center space-y-8">
+                    <h3 className="text-4xl font-serif font-bold">Need More Information?</h3>
+                    <p className="text-lg font-light opacity-70 max-w-2xl mx-auto">
+                      Contact our team for custom catalogs, volume pricing, technical consultations, or material samples.
+                    </p>
+                    <button
+                      onClick={() => {
+                        setActiveSection('contact');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className="inline-flex items-center gap-3 px-10 py-4 border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-500 font-bold uppercase tracking-wider text-[11px]"
+                    >
+                      Get In Touch
+                      <ArrowUpRight size={16} />
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        )}
+
       </main>
 
       {/* Modern Minimalist Footer */}
@@ -636,15 +897,112 @@ const App = () => {
              </div>
           </div>
           
-          <div className="pt-20 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] font-bold uppercase tracking-[0.5em] opacity-20">
-            <span>© 2025 BODHITREE DESIGNERS FURNITURE. ALL RIGHTS RESERVED.</span>
+          {/* Privacy policy block removed per request */}
+
+            <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] font-bold uppercase tracking-[0.5em] opacity-20">
+            <span>© 2025 BODHITREE DESIGNER'S FURNITURE. ALL RIGHTS RESERVED.</span>
             <div className="flex gap-12">
-              <span>privacy policy</span>
-              <span>terms of sale</span>
+              <button onClick={() => setShowPrivacy(true)} className="hover:opacity-60 transition-opacity">privacy policy</button>
+              <button onClick={() => setShowTerms(true)} className="hover:opacity-60 transition-opacity">terms of sale</button>
             </div>
           </div>
         </div>
       </footer>
+
+      {/* Privacy Policy Modal */}
+      <AnimatePresence>
+        {showPrivacy && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/30 backdrop-blur-sm px-4"
+            onClick={() => setShowPrivacy(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 10 }}
+              transition={{ duration: 0.25 }}
+              className="max-w-2xl w-full bg-white text-black rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] ring-1 ring-black/5 overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between px-8 py-6 border-b border-slate-200">
+                <h3 className="text-xl font-serif font-bold text-slate-900">Privacy Policy</h3>
+                <button onClick={() => setShowPrivacy(false)} className="text-sm uppercase tracking-[0.2em] text-slate-600 hover:text-slate-800">Close</button>
+              </div>
+              <div className="px-8 py-6 space-y-4 text-base leading-relaxed text-slate-800">
+                <p className="font-medium text-slate-900"><span className="font-semibold">What we collect:</span> name, email, phone and your message when you contact us.</p>
+                <p><span className="font-semibold text-slate-900">How we use it:</span> to respond to inquiries, provide quotes, and manage projects. We do not sell your data.</p>
+                <p><span className="font-semibold text-slate-900">Sharing:</span> messages are delivered via our email provider (EmailJS) solely for sending your request to us.</p>
+                <p><span className="font-semibold text-slate-900">Retention:</span> we keep information only as long as needed for these purposes, then delete it.</p>
+                <p><span className="font-semibold text-slate-900">Your choices:</span> request access, correction, or deletion anytime at <a className="text-primary hover:underline" href="mailto:info@bodhitreedf.com">info@bodhitreedf.com</a>.</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Terms of Sale Modal */}
+      <AnimatePresence>
+        {showTerms && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/30 backdrop-blur-sm px-4"
+            onClick={() => setShowTerms(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 10 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 10 }}
+              transition={{ duration: 0.25 }}
+              className="max-w-2xl w-full bg-white text-black rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.35)] ring-1 ring-black/5 overflow-hidden max-h-[80vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between px-8 py-6 border-b border-slate-200 sticky top-0 bg-white z-10">
+                <h3 className="text-xl font-serif font-bold text-slate-900">Terms of Sale</h3>
+                <button onClick={() => setShowTerms(false)} className="text-sm uppercase tracking-[0.2em] text-slate-600 hover:text-slate-800">Close</button>
+              </div>
+              <div className="px-8 py-6 space-y-5 text-base leading-relaxed text-slate-800">
+                <div>
+                  <p className="font-semibold text-slate-900 mb-2">1. Product Description</p>
+                  <p>All furniture products are as described and shown in our catalogs and website. We provide detailed specifications, dimensions, and materials for each item.</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900 mb-2">2. Pricing & Payment</p>
+                  <p>Prices are in INR unless stated otherwise. Quotes are valid for 30 days. We accept bank transfers, credit cards, and digital payments. Payment must be received before production or delivery.</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900 mb-2">3. Customization & Lead Time</p>
+                  <p>Custom furniture requires 4–8 weeks depending on complexity. Any design changes after confirmation may incur additional costs. Timelines are estimated and not guaranteed.</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900 mb-2">4. Delivery & Installation</p>
+                  <p>Delivery is arranged upon final payment. Installation is available for an additional fee. Customer is responsible for site access and any structural requirements.</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900 mb-2">5. Returns & Warranty</p>
+                  <p>Defective items may be replaced or refunded within 7 days of delivery. Custom orders are non-refundable unless defective. We provide a 1-year warranty against manufacturing defects.</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900 mb-2">6. Liability</p>
+                  <p>Bodhitree Designers Furniture LLP is not liable for indirect or consequential damages. Our liability is limited to the purchase price of the item.</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900 mb-2">7. Governing Law</p>
+                  <p>These terms are governed by the laws of India. Any disputes shall be resolved through mutual negotiation or legal proceedings in the appropriate jurisdiction.</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900 mb-2">8. Contact</p>
+                  <p>For questions, contact us at <a className="text-primary hover:underline" href="mailto:info@bodhitreedf.com">info@bodhitreedf.com</a> or call <a className="text-primary hover:underline" href="tel:+918197408904">+91 8197408904</a>.</p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {activeSection !== 'home' && (
         <button 
